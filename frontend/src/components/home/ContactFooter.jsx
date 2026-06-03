@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Container from "../common/Container";
 import { Mail } from "lucide-react";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const ContactFooter = () => {
     const socialLinks = [
@@ -23,23 +24,23 @@ const ContactFooter = () => {
     <div className="w-full bg-[#1e1e1d] py-10 px-5 md:p-15 mt-20">
       <Container styles={"flex justify-center flex-col gap-3"}>
 
-        <h1 className="text-2xl text-white font-bold">Contact</h1>
+        <motion.h1 initial={{ opacity: 0, y:15 }} whileInView={{ opacity: 1, y:0 }} transition={{ duration: 0.5, delay: 0.2 }} className="text-2xl text-white font-bold">Contact</motion.h1>
 
-        <p className="md:w-210 mt-3 text-lg text-neutral-500">
+        <motion.p initial={{ opacity: 0, y:15 }} whileInView={{ opacity: 1, y:0 }} transition={{ duration: 0.5, delay: 0.3 }} className="md:w-210 mt-3 text-lg text-neutral-500">
           Have a project in mind or want to work together? I'd love to hear from
           you. Feel free to send me a message through the contact form or email
           me directly. Whether it's a freelance project, full-time opportunity,
           or a simple question, I'm always happy to connect and discuss how I
           can help.
-        </p>
-        <p className="mt-3 flex items-center gap-3 font-semibold text-neutral-500">
+        </motion.p>
+        <motion.p initial={{ opacity: 0, y:15 }} whileInView={{ opacity: 1, y:0 }} transition={{ duration: 0.5, delay: 0.4 }} className="mt-3 flex items-center gap-3 font-semibold text-neutral-500">
           <span>
             <Mail />
           </span>
           kaifsoomro82@gmail.com
-        </p>
+        </motion.p>
 
-        <div className="mt-5 flex items-center gap-4 text-neutral-500">
+        <motion.div initial={{ opacity: 0, y:15 }} whileInView={{ opacity: 1, y:0 }} transition={{ duration: 0.5, delay: 0.5 }} className="mt-5 flex items-center gap-4 text-neutral-500">
            {
             socialLinks.map((social, index) => (
                 <Link key={index} to={social.link}>
@@ -47,7 +48,7 @@ const ContactFooter = () => {
                 </Link>
             ))
            }
-        </div>
+        </motion.div>
       </Container>
     </div>
   );

@@ -1,15 +1,16 @@
 import React from "react";
 import Container from "../common/Container";
+import { motion } from "framer-motion";
 
 const ExperienceComp = () => {
   return (
     <div className="mt-10 md:mt-18 flex flex-col items-center justify-center gap-8 px-5">
-      <h1 className="font-extrabold uppercase text-3xl md:text-4xl bg-linear-to-t from-blue-500 to-blue-300 bg-clip-text text-transparent">
+      <motion.h1 initial={{ opacity: 0, y:15 }} whileInView={{ opacity: 1, y:0 }} transition={{ duration: 0.5, delay: 0.2 }} className="font-extrabold uppercase text-3xl md:text-4xl bg-linear-to-t from-blue-500 to-blue-300 bg-clip-text text-transparent">
         Experience
-      </h1>
+      </motion.h1>
 
       <Container>
-        <div>
+        <motion.div initial={{ opacity: 0, y:15 }} whileInView={{ opacity: 1, y:0 }} transition={{ duration: 0.5, delay: 0.4 }}>
           <div className="mt-3 md:mt-0 text-white md:text-2xl flex flex-col md:flex-row items-start md:items-center justify-between">
             <h1 className="flex items-center gap-5 md:gap-8">
               <span>
@@ -31,7 +32,7 @@ const ExperienceComp = () => {
             clients while following industry best practices and clean code
             principles.
           </p>
-        </div>
+        </motion.div>
       </Container>
     </div>
   );
