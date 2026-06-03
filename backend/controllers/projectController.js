@@ -6,6 +6,7 @@ export const addProject = async (req, res) => {
   try {
     const {
       title,
+      subTitle,
       description,
       techStack,
       liveUrl,
@@ -18,6 +19,7 @@ export const addProject = async (req, res) => {
 
     if (
       !title ||
+      !subTitle ||
       !description ||
       !techStack ||
       !liveUrl ||
@@ -51,6 +53,7 @@ export const addProject = async (req, res) => {
 
     const newProject = await Project.create({
       title,
+      subTitle,
       description,
       techStack,
       images: imageUrls,
@@ -111,6 +114,7 @@ export const updateProject = async (req, res) => {
   try {
     const {
       title,
+      subTitle,
       description,
       techStack,
       liveUrl,
@@ -148,6 +152,7 @@ export const updateProject = async (req, res) => {
     }
 
     project.title = title || project.title;
+    project.subTitle = subTitle || project.subTitle;
     project.description = description || project.description;
     project.techStack = techStack || project.techStack;
     project.liveUrl = liveUrl || project.liveUrl;
