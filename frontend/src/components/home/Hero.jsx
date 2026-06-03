@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
-    <div className="w-full mt-20 md:mt-30 flex flex-col items-center justify-center text-center px-5 md:px-5">
-      <img src="/avatar.png" alt="" className="w-40 md:w-65" />
+    <div className="w-full mt-20 md:mt-30 flex flex-col items-center justify-center text-center px-5 md:px-5 pt-15">
+      <motion.img initial={{ opacity: 0, y:20 }} animate={{ opacity: 1, y:0 }} transition={{ duration: 0.5 }} src="/avatar.png" alt="" className="w-40 md:w-65" />
 
       <h1 className="max-w mt-8 text-white font-bold text-4xl md:text-7xl md:leading-18 leading-10 tracking-tight">
         I do code and <br /> make content{" "}
