@@ -4,6 +4,7 @@ import connectDB from "./config/db.js";
 import userRoute from "./routes/userRoutes.js";
 import projectRoute from "./routes/projectRoutes.js";
 import contactRoute from "./routes/contactRoutes.js";
+import resumeRoute from "./routes/resumeRoutes.js";
 import cors from "cors";
 import { v2 as cloudinary } from "cloudinary";
 
@@ -16,13 +17,17 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 })
 
-app.use(cors());
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/project", projectRoute);
 app.use("/api/v1/contact", contactRoute);
+app.use("/api/v1/resume", resumeRoute);
 
 app.listen(PORT, () => {
     connectDB();

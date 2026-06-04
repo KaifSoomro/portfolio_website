@@ -6,6 +6,7 @@ import Projects from "./pages/public/Projects";
 import Experience from "./pages/public/Experience";
 import Contact from "./pages/public/Contact";
 import { Toaster } from "react-hot-toast";
+import Login from "./pages/private/Login";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/projects" element={<Projects />} />
         <Route path="/experience" element={<Experience />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
       <Toaster />
     </Router>

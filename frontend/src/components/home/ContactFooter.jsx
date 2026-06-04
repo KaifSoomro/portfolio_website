@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Container from "../common/Container";
 import { Mail } from "lucide-react";
-import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaInstagram, FaUser } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 const ContactFooter = () => {
@@ -18,6 +18,10 @@ const ContactFooter = () => {
         {
             link: "https://www.instagram.com/kaif__soomro/",
             img: <FaInstagram className="text-2xl"/>
+        },
+        {
+            link: "/login",
+            img: <FaUser className="text-2xl"/>
         }
     ]
   return (
