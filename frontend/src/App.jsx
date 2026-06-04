@@ -5,6 +5,7 @@ import Home from "./pages/public/Home";
 import Projects from "./pages/public/Projects";
 import Experience from "./pages/public/Experience";
 import Contact from "./pages/public/Contact";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/experience" element={<Experience />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
+      <Toaster />
     </Router>
   );
 };

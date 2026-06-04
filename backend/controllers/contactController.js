@@ -3,18 +3,24 @@ import { transporter } from "../config/email.js";
 export const sendEmail = async (req, res) => {
   try {
     const { email, subject, message } = req.body;
-    if (!email || !message) {
+    if (!email || !subject || !message) {
       return res.status(400).json({
         success: false,
-        message: "Both fields are required.",
+        message: "All fields are required.",
       });
     }
 
     await transporter.sendMail({
-      from: email, // others email
-      to: process.env.USER_EMAIL, // my email
+      from: `Contact Form ${process.env.USER_EMAIL}`, 
+      to: process.env.USER_EMAIL,
       subject: subject,
-      html: `<p> ${message} </p>`,
+      html: `<h3>New Contact Message</h3>
+      <p><strong>Name:</strong> ${subject}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Message:</strong></p>
+      <p>${message}</p>
+      `,
+      replyTo: email,
     });
 
     return res.status(200).json({
