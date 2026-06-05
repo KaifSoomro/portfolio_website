@@ -55,6 +55,10 @@ const projectSchema = new mongoose.Schema(
       default: false,
     },
 
+    views: {
+      type: Number
+    },
+
     status: {
       type: String,
       enum: ["draft", "published"],
