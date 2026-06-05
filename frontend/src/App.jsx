@@ -9,6 +9,7 @@ import AdminDashboard from "./pages/private/AdminDashboard";
 import ProtectRoute from "./components/auth/ProtectRoute";
 import DashboardHome from "./pages/private/DashboardHome";
 import ManageProjects from "./pages/private/ManageProjects";
+import ManageEmails from "./pages/private/ManageEmails";
 
 const App = () => {
   const location = useLocation();
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/admin-dashboard" element={<ProtectRoute> <AdminDashboard /> </ProtectRoute>}>
           <Route path="home" element={<DashboardHome />} />
           <Route path="manage-projects" element={<ManageProjects />} />
+          <Route path="emails" element={<ManageEmails />} />
         </Route>
       </Routes>
       </>

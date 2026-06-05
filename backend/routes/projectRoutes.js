@@ -3,6 +3,7 @@ import {
   addProject,
   deleteProject,
   getAllProjects,
+  getEverything,
   getSingleProject,
   updateProject,
 } from "../controllers/projectController.js";
@@ -16,5 +17,6 @@ router.get("/single/:projectId", getSingleProject);
 router.post("/add", protectRoute, isAdmin, addProject); // pending multer middleware
 router.delete("/delete", protectRoute, isAdmin, deleteProject);
 router.put("/update/:projectId", protectRoute, isAdmin, updateProject); // pending multer middleware
+router.get("/everything", protectRoute, isAdmin, getEverything);
 
 export default router;

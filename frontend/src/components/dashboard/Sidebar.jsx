@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
-import { FolderBookmark } from "lucide-react";
+import { FolderBookmark, Mail } from "lucide-react";
 import { useSelector } from "react-redux";
 
 const Sidebar = () => {
@@ -24,7 +24,11 @@ const Sidebar = () => {
         </NavLink>
 
         <NavLink to={"manage-projects"} className={linkClass}>
-          <FolderBookmark size={22} /> Manage Projects
+          <FolderBookmark size={22} /> Projects
+        </NavLink>
+
+        <NavLink to={"emails"} className={linkClass}>
+          <Mail size={22} /> Emails
         </NavLink>
       </div>
 

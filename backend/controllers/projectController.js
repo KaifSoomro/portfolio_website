@@ -1,6 +1,7 @@
 import { v2 as cloudinary } from "cloudinary";
 import Project from "../models/project.model.js";
 import User from "../models/user.model.js";
+import Email from "../models/email.model.js";
 
 export const addProject = async (req, res) => {
   try {
@@ -47,7 +48,7 @@ export const addProject = async (req, res) => {
 
       imageUrls = results.map((result) => ({
         url: result.secure_url,
-        public_id: result.public_id
+        public_id: result.public_id,
       }));
     }
 
@@ -90,10 +91,10 @@ export const deleteProject = async (req, res) => {
       });
     }
 
-    if(project.images.length > 0){
-       for (let img of project.images) {
-          await cloudinary.uploader.destroy(img.public_id);
-       }
+    if (project.images.length > 0) {
+      for (let img of project.images) {
+        await cloudinary.uploader.destroy(img.public_id);
+      }
     }
 
     await Project.findByIdAndDelete(_id);
@@ -191,7 +192,7 @@ export const getAllProjects = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      projects
+      projects,
     });
   } catch (error) {
     return res.status(500).json({
@@ -204,8 +205,11 @@ export const getAllProjects = async (req, res) => {
 
 export const getSingleProject = async (req, res) => {
   try {
-    const {projectId} = req.params;
-    const project = await Project.findById(projectId).populate("createdBy", "-password");
+    const { projectId } = req.params;
+    const project = await Project.findById(projectId).populate(
+      "createdBy",
+      "-password",
+    );
 
     if (!project) {
       return res.status(404).json({
@@ -216,12 +220,65 @@ export const getSingleProject = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      project
+      project,
     });
   } catch (error) {
     return res.status(500).json({
       success: false,
       error: "Internal server error in getSingleProject",
+      message: error.message,
+    });
+  }
+};
+
+export const getEverything = async (req, res) => {
+  try {
+    const emails = await Email.find();
+    const projects = await Project.find();
+
+    if(!emails || !projects){
+      return res.status(404).json({
+      success: false,
+      message: "No data were found"
+    }); 
+    }
+
+    const totalViews = projects.reduce((acc, project) => {
+      acc + (project.views || 0)
+    }, 0);
+
+    const newData = [
+      {
+        name: "Total Views",
+        value: totalViews || 0,
+        icon: "eye",
+        colorFrom: "from-blue-800",
+        colorTo: "to-blue-700"
+      },
+      {
+        name: "Total Projects",
+        value: projects.length,
+        icon: "foldercodeicon",
+        colorFrom: "from-purple-800",
+        colorTo: "to-purple-700"
+      },
+      {
+        name: "Total Emails",
+        value: emails.length,
+        icon: "mails",
+        colorFrom: "from-yellow-600",
+        colorTo: "to-yellow-500"
+      }
+    ]
+
+    return res.status(200).json({
+      success: true,
+      all: newData
+    })
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: "Internal server error in getEverything",
       message: error.message,
     });
   }

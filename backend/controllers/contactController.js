@@ -1,4 +1,5 @@
 import { transporter } from "../config/email.js";
+import Email from "../models/email.model.js";
 
 export const sendEmail = async (req, res) => {
   try {
@@ -11,7 +12,7 @@ export const sendEmail = async (req, res) => {
     }
 
     await transporter.sendMail({
-      from: `Contact Form ${process.env.USER_EMAIL}`, 
+      from: `Contact Form ${process.env.USER_EMAIL}`,
       to: process.env.USER_EMAIL,
       subject: subject,
       html: `<h3>New Contact Message</h3>
@@ -21,6 +22,13 @@ export const sendEmail = async (req, res) => {
       <p>${message}</p>
       `,
       replyTo: email,
+    });
+
+    const newEmail = new Email.create({
+      from: email,
+      to: process.env.USER_EMAIL,
+      name: subject,
+      message: message,
     });
 
     return res.status(200).json({
