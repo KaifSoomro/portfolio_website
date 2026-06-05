@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const ExperienceComp = () => {
   return (
-    <div className="mt-10 md:mt-18 flex flex-col items-center justify-center gap-8 px-5">
+    <div id="experience" className="mt-10 md:mt-18 flex flex-col items-center justify-center gap-8 px-5">
       <motion.h1 initial={{ opacity: 0, y:15 }} whileInView={{ opacity: 1, y:0 }} transition={{ duration: 0.5, delay: 0.2 }} className="font-extrabold uppercase text-3xl md:text-4xl bg-linear-to-t from-blue-500 to-blue-300 bg-clip-text text-transparent">
         Experience
       </motion.h1>

@@ -86,10 +86,13 @@ export const login = async (req, res) => {
       expiresIn: "7d",
     });
 
+    const findUser = await User.findOne({ email }).select("-password");
+
     return res.status(200).json({
       success: true,
       message: "Login successfull.",
       token: accessToken,
+      user: findUser
     });
   } catch (error) {
     return res.status(500).json({

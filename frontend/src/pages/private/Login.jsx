@@ -1,8 +1,66 @@
+import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../features/userSlice.js";
+
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { mutate: login, isPending } = useMutation({
+    mutationFn: async(formData) => {
+      try {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/login`, {
+          method: "POST",
+          headers: {
+            'Content-Type': "application/json"
+          },
+          body: JSON.stringify(formData)
+        });
+
+        const data = await res.json();
+
+        if(!res.ok){
+          throw new Error(data.message || data.error);
+        }
+
+        dispatch(setUser(data.user));
+        localStorage.setItem("token", JSON.stringify(data.token)); 
+
+        navigate("/");
+        
+        return data;
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
+    onSuccess: (data) => {
+      toast.success(data.message);
+    },
+    onError: (data) => {
+      toast.error(data.error || data.message);
+    }
+  })
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = {
+      email,
+      password
+    }
+
+    login(formData);
+    setEmail("")
+    setPassword("")
+  }
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0a0a0f] px-4">
-    
-
       <div className="absolute w-50 h-50 md:w-100 md:h-100 bg-pink-500/20 blur-[120px] rounded-full top-10 left-10 animate-pulse"></div>
 
       <div className="absolute w-50 h-50 md:w-100 md:h-100 bg-purple-600/20 blur-[120px] rounded-full bottom-10 right-10 animate-pulse"></div>
@@ -17,12 +75,14 @@ export default function Login() {
               Login to continue your journey
             </p>
 
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label className="text-sm text-gray-300">Email</label>
                 <input
                   type="email"
                   placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full mt-1 px-4 py-3 rounded-xl bg-black/40 text-white border border-gray-700 focus:outline-none focus:border-pink-500 transition"
                 />
               </div>
@@ -32,6 +92,8 @@ export default function Login() {
                 <input
                   type="password"
                   placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="w-full mt-1 px-4 py-3 rounded-xl bg-black/40 text-white border border-gray-700 focus:outline-none focus:border-purple-500 transition"
                 />
               </div>
@@ -44,7 +106,7 @@ export default function Login() {
                 hover:scale-[1.02] active:scale-[0.98] transition duration-300
                 shadow-[0_0_25px_rgba(236,72,153,0.4)]"
               >
-                Login
+                { isPending ? "Logging in..." : "Login" } 
               </button>
             </form>
           </div>
