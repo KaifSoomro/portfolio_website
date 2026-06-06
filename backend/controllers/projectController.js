@@ -14,6 +14,7 @@ export const addProject = async (req, res) => {
       githubUrl,
       category,
       isFeatured,
+      status,
     } = req.body;
 
     let images = req.files;
@@ -22,10 +23,10 @@ export const addProject = async (req, res) => {
       !title ||
       !subTitle ||
       !description ||
-      !techStack ||
       !liveUrl ||
       !githubUrl ||
-      !category
+      !category ||
+      !status?.trim()
     ) {
       return res.status(400).json({
         success: false,
@@ -37,12 +38,20 @@ export const addProject = async (req, res) => {
 
     let imageUrls = [];
 
-    if (images && images.length > 0) {
-      const uploadPromises = images.map((file) =>
-        cloudinary.uploader.upload(file.path, {
-          folder: "projects",
-        }),
-      );
+    if (images.length > 0) {
+      const uploadPromises = images.map((file) => {
+        return new Promise((resolve, reject) => {
+          const stream = cloudinary.uploader.upload_stream(
+            { folder: "projects" },
+            (error, result) => {
+              if (error) return reject(error);
+              resolve(result);
+            },
+          );
+
+          stream.end(file.buffer);
+        });
+      });
 
       const results = await Promise.all(uploadPromises);
 
@@ -62,6 +71,8 @@ export const addProject = async (req, res) => {
       githubUrl,
       category,
       isFeatured,
+      views: 0,
+      status,
       createdBy: user,
     });
 
@@ -236,45 +247,36 @@ export const getEverything = async (req, res) => {
     const emails = await Email.find();
     const projects = await Project.find();
 
-    if(!emails || !projects){
+    if (!emails || !projects) {
       return res.status(404).json({
-      success: false,
-      message: "No data were found"
-    }); 
+        success: false,
+        message: "No data were found",
+      });
     }
 
     const totalViews = projects.reduce((acc, project) => {
-      acc + (project.views || 0)
+      acc + (project.views || 0);
     }, 0);
 
     const newData = [
       {
         name: "Total Views",
-        value: totalViews || 0,
-        icon: "eye",
-        colorFrom: "from-blue-800",
-        colorTo: "to-blue-700"
+        value: totalViews || 0
       },
       {
         name: "Total Projects",
-        value: projects.length,
-        icon: "foldercodeicon",
-        colorFrom: "from-purple-800",
-        colorTo: "to-purple-700"
+        value: projects.length
       },
       {
         name: "Total Emails",
-        value: emails.length,
-        icon: "mails",
-        colorFrom: "from-yellow-600",
-        colorTo: "to-yellow-500"
-      }
-    ]
+        value: emails.length
+      },
+    ];
 
     return res.status(200).json({
       success: true,
-      all: newData
-    })
+      all: newData,
+    });
   } catch (error) {
     return res.status(500).json({
       success: false,

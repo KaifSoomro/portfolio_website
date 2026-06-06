@@ -29,7 +29,6 @@ const DashboardHome = () => {
         );
 
         const data = await res.json();
-        console.log(data)
 
         if (!res.ok) {
           throw new Error(data.message || data.error);
@@ -48,8 +47,9 @@ const DashboardHome = () => {
     "url(#yellowGradient)",
   ];
 
-
   const icons = [<Eye />, <FolderCodeIcon />, <Mails />];
+
+  const colorClasses = ["bg-blue-700", "bg-purple-700", "bg-yellow-600"];
 
   return (
     <div className="w-full p-5 mt-5">
@@ -62,11 +62,9 @@ const DashboardHome = () => {
                 className="w-full bg-linear-to-br from-neutral-900 to-neutral-800 p-5 rounded-xl border border-neutral-500/25"
               >
                 <div
-                  className={`w-15 h-15 rounded-xl bg-linear-to-tl flex items-center justify-center border  border-blue-500/25 ${value?.colorFrom} ${value?.colorTo}`}
+                  className={`w-15 h-15 rounded-xl bg-linear-to-tl flex items-center justify-center border  border-blue-500/25 ${colorClasses[index]}`}
                 >
-                  {
-                    icons[index]
-                  }
+                  {icons[index]}
                 </div>
                 <h1 className="text-xl mt-3 text-neutral-500">{value?.name}</h1>
                 <h1 className="text-4xl mt-2 font-bold">{value?.value}</h1>

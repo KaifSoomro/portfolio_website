@@ -46,8 +46,8 @@ const projectSchema = new mongoose.Schema(
 
     category: {
       type: String,
-      enum: ["frontend", "backend", "fullstack", "mobile", "other"],
-      default: "fullstack",
+      enum: ["frontend", "backend", "full-stack", "mobile", "other"],
+      default: "full-stack",
     },
 
     isFeatured: {

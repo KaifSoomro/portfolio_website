@@ -6,6 +6,6 @@ const upload = multer({
   }
 });
 
-export const singleUpload = upload.single("file");
+export const singleUpload = upload.single("image");
 
-export const multiUpload = upload.array("files", 5);
+export const multiUpload = upload.array("images", 5);
