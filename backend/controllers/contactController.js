@@ -24,12 +24,14 @@ export const sendEmail = async (req, res) => {
       replyTo: email,
     });
 
-    const newEmail = new Email.create({
+    const newEmail = new Email({
       from: email,
       to: process.env.USER_EMAIL,
       name: subject,
       message: message,
     });
+
+    await newEmail.save();
 
     return res.status(200).json({
       success: true,
@@ -39,6 +41,55 @@ export const sendEmail = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Internal server error in sendEmail",
+      error: error.message,
+    });
+  }
+};
+
+export const getEmail = async (req, res) => {
+  try {
+    const { emailId } = req.params;
+    const email = await Email.findById({ _id: emailId });
+
+    if (!email) {
+      return res.status(404).json({
+        success: false,
+        message: "Email not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      email
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error in getEmail",
+      error: error.message,
+    });
+  }
+};
+
+export const getAllEmails = async (req, res) => {
+  try {
+    const emails = await Email.find();
+
+    if (!emails) {
+      return res.status(404).json({
+        success: false,
+        message: "Emails not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      emails
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error in getAllEmails",
       error: error.message,
     });
   }
