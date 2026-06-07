@@ -49,7 +49,7 @@ const Navbar = () => {
 
           {location.pathname === "/" ? (
             <Link
-              to={expLink}
+              to={"experience"}
               smooth={true}
               duration={500}
               className="text-white hover:text-transparent hover:bg-linear-to-t hover:from-pink-600 hover:to-pink-200 hover:bg-clip-text text-2xl md:text-lg transition-all duration-200 cursor-pointer"
