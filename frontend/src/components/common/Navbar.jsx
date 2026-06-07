@@ -118,15 +118,25 @@ const Navbar = () => {
         >
           Projects
         </NavLink>
-        <Link
-          to="experience"
-          smooth={true}
-          duration={500}
-          onClick={() => setIsOpen(false)}
-          className="text-white hover:text-transparent hover:bg-linear-to-t hover:from-pink-600 hover:to-pink-200 hover:bg-clip-text text-2xl md:text-lg transition-all duration-200 cursor-pointer"
-        >
-          Experience
-        </Link>
+        {location.pathname === "/" ? (
+          <Link
+            to={"experience"}
+            smooth={true}
+            duration={500}
+            onClick={() => setIsOpen(false)}
+            className="text-white hover:text-transparent hover:bg-linear-to-t hover:from-pink-600 hover:to-pink-200 hover:bg-clip-text text-2xl md:text-lg transition-all duration-200 cursor-pointer"
+          >
+            Experience
+          </Link>
+        ) : (
+          <NavLink
+            to="/"
+            onClick={() => setIsOpen(false)}
+            className="text-white hover:text-transparent hover:bg-linear-to-t hover:from-pink-600 hover:to-pink-200 hover:bg-clip-text text-2xl md:text-lg transition-all duration-200 cursor-pointer"
+          >
+            Experience
+          </NavLink>
+        )}
         <NavLink
           to="/contact"
           className={linkClass}

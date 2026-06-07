@@ -19,15 +19,7 @@ export const addProject = async (req, res) => {
 
     let images = req.files;
 
-    if (
-      !title ||
-      !subTitle ||
-      !description ||
-      !liveUrl ||
-      !githubUrl ||
-      !category ||
-      !status?.trim()
-    ) {
+    if (!title || !subTitle || !description || !category || !status?.trim()) {
       return res.status(400).json({
         success: false,
         message: "All fields are required.",
@@ -261,15 +253,15 @@ export const getEverything = async (req, res) => {
     const newData = [
       {
         name: "Total Views",
-        value: totalViews || 0
+        value: totalViews || 0,
       },
       {
         name: "Total Projects",
-        value: projects.length
+        value: projects.length,
       },
       {
         name: "Total Emails",
-        value: emails.length
+        value: emails.length,
       },
     ];
 
@@ -281,6 +273,30 @@ export const getEverything = async (req, res) => {
     return res.status(500).json({
       success: false,
       error: "Internal server error in getEverything",
+      message: error.message,
+    });
+  }
+};
+
+export const getFeaturedProjects = async (req, res) => {
+  try {
+    const featuredProjects = await Project.find({ isFeatured: true });
+
+    if (!featuredProjects) {
+      return res.status(404).json({
+        success: false,
+        message: "No featured projects were found."
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      featuredProjects
+    })
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: "Internal server error in featuredProjects",
       message: error.message,
     });
   }

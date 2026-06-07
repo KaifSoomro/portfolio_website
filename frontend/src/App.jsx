@@ -12,6 +12,7 @@ import ManageProjects from "./pages/private/ManageProjects";
 import ManageEmails from "./pages/private/ManageEmails";
 import AddProject from "./pages/private/AddProject";
 import SingleEmail from "./pages/private/SingleEmail";
+import SingleProject from "./pages/public/SingleProject";
 
 const App = () => {
   const location = useLocation();
@@ -22,6 +23,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/projects/:projectId" element={<SingleProject />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
 
