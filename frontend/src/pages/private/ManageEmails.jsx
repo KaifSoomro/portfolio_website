@@ -1,12 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { Mail, MessageCircleMoreIcon, UserCircle2Icon } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import EmailCard from "../../components/dashboard/EmailCard";
+import EmailCardSkeleton from "../../components/dashboard/EmailCardSkeleton";
 
 const ManageEmails = () => {
   const token = JSON.parse(localStorage.getItem("token"));
+  const [searchInput, setSearchInput] = useState("");
 
-  const { data: emails } = useQuery({
+  const { data: emails, isLoading } = useQuery({
     queryKey: ["emails"],
     queryFn: async () => {
       try {
@@ -32,12 +34,17 @@ const ManageEmails = () => {
       }
     },
   });
+
+  const filterEmail = emails?.filter((email) =>
+    email?.from.includes(searchInput),
+  );
   return (
     <div className="w-full p-5">
       <div className="w-full flex items-center justify-center gap-5 mt-5">
         <input
           name="search"
           type="text"
+          onChange={(e) => setSearchInput(e.target.value)}
           className="w-100 h-10.5 px-4 rounded-xl bg-neutral-950 border border-neutral-700 focus:border-purple-500 outline-none"
         />
         <button
@@ -57,9 +64,17 @@ const ManageEmails = () => {
         </div>
       )}
 
+      {isLoading && <EmailCardSkeleton />}
+
+      {filterEmail?.length === 0 && (
+        <div className="w-full text-center text-xl mt-20 text-red-400">
+          No emails were found of <span className="underline">{ searchInput }</span>
+        </div>
+      )}
+
       <div className="mt-7 w-full grid grid-cols-3">
-        {emails &&
-          emails?.map((email, index) => (
+        {filterEmail &&
+          filterEmail?.map((email, index) => (
             <EmailCard key={index} email={email} />
           ))}
       </div>

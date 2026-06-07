@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { LogOut, Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-scroll";
@@ -11,6 +11,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const linkClass = ({ isActive }) =>
     `text-2xl md:text-lg transition-all duration-200 ${
@@ -19,11 +20,11 @@ const Navbar = () => {
         : "text-white hover:text-transparent hover:bg-linear-to-t hover:from-pink-600 hover:to-pink-200 hover:bg-clip-text"
     }`;
 
-    const handleLogout = () => {
-      dispatch(setUser(null));
+  const handleLogout = () => {
+    dispatch(setUser(null));
 
-      toast.success("Logged out successfull");
-    }
+    toast.success("Logged out successfull");
+  };
 
   return (
     <motion.div
@@ -45,14 +46,25 @@ const Navbar = () => {
           <NavLink to="/projects" className={linkClass}>
             Projects
           </NavLink>
-          <Link
-            to="experience"
-            smooth={true}
-            duration={500}
-            className="text-white hover:text-transparent hover:bg-linear-to-t hover:from-pink-600 hover:to-pink-200 hover:bg-clip-text text-2xl md:text-lg transition-all duration-200 cursor-pointer"
-          >
-            Experience
-          </Link>
+
+          {location.pathname === "/" ? (
+            <Link
+              to={expLink}
+              smooth={true}
+              duration={500}
+              className="text-white hover:text-transparent hover:bg-linear-to-t hover:from-pink-600 hover:to-pink-200 hover:bg-clip-text text-2xl md:text-lg transition-all duration-200 cursor-pointer"
+            >
+              Experience
+            </Link>
+          ) : (
+            <NavLink
+              to="/"
+              className="text-white hover:text-transparent hover:bg-linear-to-t hover:from-pink-600 hover:to-pink-200 hover:bg-clip-text text-2xl md:text-lg transition-all duration-200 cursor-pointer"
+            >
+              Experience
+            </NavLink>
+          )}
+
           <NavLink to="/contact" className={linkClass}>
             Contact
           </NavLink>

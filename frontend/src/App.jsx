@@ -11,6 +11,7 @@ import DashboardHome from "./pages/private/DashboardHome";
 import ManageProjects from "./pages/private/ManageProjects";
 import ManageEmails from "./pages/private/ManageEmails";
 import AddProject from "./pages/private/AddProject";
+import SingleEmail from "./pages/private/SingleEmail";
 
 const App = () => {
   const location = useLocation();
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="manage-projects" element={<ManageProjects />} />
           <Route path="new-project" element={<AddProject />} />
           <Route path="emails" element={<ManageEmails />} />
+          <Route path="/admin-dashboard/emails/:emailId" element={<SingleEmail />} />
         </Route>
       </Routes>
       </>
