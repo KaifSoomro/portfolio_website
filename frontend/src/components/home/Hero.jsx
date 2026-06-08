@@ -70,7 +70,7 @@ const Hero = () => {
         </Link>
 
         <Link
-          to={`${import.meta.env.VITE_BACKEND_URL}/public/resume.pdf`}
+          to={`https://portfolio-website-backend-jade.vercel.app/public/resume.pdf`}
           target="_blank"
           className="bg-transparent rounded-full px-5 py-2 md:px-8 md:py-3 text-white md:text-xl font-semibold border border-white hover:bg-white hover:text-[#161513] cursor-pointer transition-all duration-200"
         >
