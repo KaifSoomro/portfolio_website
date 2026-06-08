@@ -65,6 +65,10 @@ const Navbar = () => {
             </NavLink>
           )}
 
+           <NavLink to="/skills" className={linkClass}>
+            My Skills
+          </NavLink>
+
           <NavLink to="/contact" className={linkClass}>
             Contact
           </NavLink>
@@ -137,6 +141,13 @@ const Navbar = () => {
             Experience
           </NavLink>
         )}
+        <NavLink
+          to="/skills"
+          className={linkClass}
+          onClick={() => setIsOpen(false)}
+        >
+          My Skills
+        </NavLink>
         <NavLink
           to="/contact"
           className={linkClass}

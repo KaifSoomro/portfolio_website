@@ -24,4 +24,42 @@ body {
   background: #db2777;
 }
 
+.skill-ring {
+  background: conic-gradient(from 0deg, #a855f7, #ec4899, #8b5cf6, #a855f7);
+  filter: blur(18px);
+  opacity: 0.5;
+  animation: spin 18s linear infinite;
+}
+
+.skill-ring:hover {
+  animation-play-state: paused;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 30s linear infinite;
+}
+
+.animate-spin-slow:hover {
+  animation-play-state: paused;
+}
+
 /* Navbar - color = ##1e1e1d */
