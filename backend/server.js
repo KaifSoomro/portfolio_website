@@ -29,7 +29,7 @@ app.use(express.urlencoded({extended: true}));
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/project", projectRoute);
 app.use("/api/v1/contact", contactRoute);
-app.use("/api/v1/resume", resumeRoute);
+app.use("/public", express.static("public"));
 
 app.get("/", (_, res) => {
     res.send({
