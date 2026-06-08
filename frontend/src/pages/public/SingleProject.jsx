@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Container from "../../components/common/Container";
 import { ArrowLeft, ArrowRight, LinkIcon } from "lucide-react";
@@ -14,6 +14,10 @@ const SingleProject = () => {
   const [project, setProject] = useState(null);
   const [imageIndex, setImageIndex] = useState(0);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const { data: projects, isLoading } = useQuery({
     queryKey: ["projects"],

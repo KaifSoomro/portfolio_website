@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ContactForm from '../../components/contact/ContactForm';
 import ContactFooter from "../../components/home/ContactFooter";
 
 const Contact = () => {
+  useEffect(() => {
+    window.scrollTo(0,0)
+  }, [])
   return (
     <div className='w-full mt-25 md:mt-40 flex flex-col items-center justify-center'>
       <ContactForm />

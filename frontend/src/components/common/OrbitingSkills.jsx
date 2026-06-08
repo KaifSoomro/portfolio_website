@@ -10,6 +10,7 @@ import { FaJsSquare } from "react-icons/fa";
 import { RiNextjsFill } from "react-icons/ri";
 import { SiGooglegemini } from "react-icons/si";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const icons = [
   BiLogoMongodb,
@@ -47,17 +48,23 @@ const links = [
   "",
   "https://www.typescriptlang.org/",
   "https://nextjs.org/",
-  "https://git-scm.com/"
+  "https://git-scm.com/",
 ];
 
-const radius = typeof window !== "undefined" && window.innerWidth < 768 ? 130 : 250;
+const radius =
+  typeof window !== "undefined" && window.innerWidth < 768 ? 130 : 250;
 
 const OrbitingSkills = () => {
   return (
-    <div className="relative w-full md:h-175 h-100 flex items-center justify-center overflow-hidden rounded-3xl">
+    <motion.div
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.7 }}
+      className="relative w-full md:h-175 h-100 flex items-center justify-center overflow-hidden rounded-3xl"
+    >
       <div className="absolute md:w-120 md:h-120 h-60 w-60 bg-purple-500/10 blur-3xl rounded-full" />
       <div className="absolute md:w-92.5 md:h-92.5 w-35 h-35 bg-pink-500/10 blur-3xl rounded-full" />
-      
+
       <div className="md:w-36 md:h-36 w-25 h-25 rounded-full bg-linear-to-br from-purple-600 via-fuchsia-500 to-pink-500 shadow-[0_0_80px_rgba(168,85,247,0.8)] z-10" />
 
       <div className="absolute md:w-110 md:h-110 w-50 h-50 flex items-center justify-center animate-spin-slow">
@@ -86,7 +93,7 @@ const OrbitingSkills = () => {
           );
         })}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

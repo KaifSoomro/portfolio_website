@@ -7,6 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { setProjects } from "../../features/projectSlice.js";
 
 const Projects = () => {
+
+  useEffect(() => {
+      window.scrollTo(0,0)
+    }, [])
+
   const dispatch = useDispatch();
 
   const { projects } = useSelector((state) => state.project);
