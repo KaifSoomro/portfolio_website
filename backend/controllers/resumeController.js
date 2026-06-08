@@ -6,7 +6,7 @@ const __dirname = path.dirname(__filename);
 
 export const downloadResume = async (req, res) => {
   try {
-    const filePath = path.join(__dirname, "../public/resume.pdf");
+    const filePath = path.join(__dirname, "/public/resume.pdf");
 
     return res.download(filePath, "Kaif_Soomro_CV.pdf");
   } catch (error) {
