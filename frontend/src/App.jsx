@@ -19,8 +19,8 @@ const App = () => {
   const location = useLocation();
 
   return (
-      <>
-        { !location.pathname.startsWith("/admin-dashboard") && <Navbar /> }
+    <>
+      {!location.pathname.startsWith("/admin-dashboard") && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/projects" element={<Projects />} />
@@ -30,15 +30,22 @@ const App = () => {
         <Route path="/skills" element={<Skills />} />
 
         {/* Private Routes */}
-        <Route path="/admin-dashboard" element={<ProtectRoute> <AdminDashboard /> </ProtectRoute>}>
+        <Route
+          path="/admin-dashboard"
+          element={
+            <ProtectRoute>
+              <AdminDashboard />
+            </ProtectRoute>
+          }
+        >
           <Route path="home" element={<DashboardHome />} />
           <Route path="manage-projects" element={<ManageProjects />} />
           <Route path="new-project" element={<AddProject />} />
           <Route path="emails" element={<ManageEmails />} />
-          <Route path="/admin-dashboard/emails/:emailId" element={<SingleEmail />} />
+          <Route path="emails/:emailId" element={<SingleEmail />} />
         </Route>
       </Routes>
-      </>
+    </>
   );
 };
 
