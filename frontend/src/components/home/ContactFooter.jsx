@@ -22,8 +22,8 @@ const ContactFooter = () => {
       img: <FaInstagram className="text-2xl" />,
     },
     {
-      link: user ? "" : "/login",
-      img: user ? <LogOut /> : <FaUser className="text-2xl" />,
+      link: "/login",
+      img: <FaUser className="text-2xl" />
     },
   ];
   return (
