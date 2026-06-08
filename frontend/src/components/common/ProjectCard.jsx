@@ -1,10 +1,36 @@
 import React from "react";
 import { SquareArrowOutUpRight } from "lucide-react"
 import { Link } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
 
 const ProjectCard = ({ project }) => {
+
+  const { mutate: addViews } = useMutation({
+    mutationFn: async(projectId) => {
+      try {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/project/increase-views`, {
+          method: "POST",
+          headers: {
+            'Content-Type': "application/json"
+          },
+          body: JSON.stringify({projectId})
+        });
+
+        const data = await res.json();
+
+        if(!res.ok){
+          throw new Error(data.message || data.error)
+        }
+
+        return data;
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    }
+  })
+  
   return (
-    <Link to={`/projects/${project?._id}`} className="max-w md:w-120 rounded-xl md:rounded-2xl shadow-lg relative group overflow-hidden">
+    <Link to={`/projects/${project?._id}`} onClick={()=>addViews(project?._id)} className="max-w md:w-120 rounded-xl md:rounded-2xl shadow-lg relative group overflow-hidden">
       <img src={project?.images[0]?.url} alt="" className="rounded-xl md:rounded-2xl group-hover:scale-105 transition-all duration-200" />
 
       <div className="bg-[#1e1e1d]/85 backdrop-blur-md w-full h-15 md:h-20 rounded-b-xl md:rounded-b-2xl absolute bottom-0 px-5 flex items-center justify-between">

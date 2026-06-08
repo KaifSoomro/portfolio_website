@@ -39,19 +39,21 @@ const SingleEmail = () => {
       {isLoading ? (
         <EmailDetailSkeleton />
       ) : (
-        <div className="mt-20 w-200 bg-linear-to-t from-neutral-900 to-neutral-800 border border-neutral-700 rounded-lg p-5 text-lg">
-          <h1 className="flex items-center gap-2">
-            <UserCircle2Icon /> {email?.name}
-          </h1>
-          <h1 className="flex items-center gap-2 my-3">
-            <Mail /> {email?.from}
-          </h1>
-          <p>
-            <span className="font-bold text-transparent bg-linear-to-t from-pink-600 to-pink-200 bg-clip-text">
-              Message:
-            </span>{" "}
-            {email?.message}
-          </p>
+        <div className="mt-20 w-200 bg-linear-to-t from-neutral-900 to-neutral-800 border border-neutral-700 rounded-lg p-5 text-lg flex justify-between">
+          <div>
+            <h1 className="flex items-center gap-2">
+              <UserCircle2Icon /> {email?.name}
+            </h1>
+            <h1 className="flex items-center gap-2 my-3">
+              <Mail /> {email?.from}
+            </h1>
+            <p>
+              <span className="font-bold text-transparent bg-linear-to-t from-pink-600 to-pink-200 bg-clip-text">
+                Message:
+              </span>{" "}
+              {email?.message}
+            </p>
+          </div>
         </div>
       )}
     </div>

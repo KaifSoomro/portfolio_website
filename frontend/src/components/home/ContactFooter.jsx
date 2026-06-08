@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Container from "../common/Container";
-import { Mail } from "lucide-react";
+import { LogOut, Mail } from "lucide-react";
 import { FaGithub, FaLinkedin, FaInstagram, FaUser } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
 
 const ContactFooter = () => {
+  const { user } = useSelector(state => state.user);
     const socialLinks = [
         {
             link: "https://github.com/KaifSoomro",
@@ -20,8 +22,8 @@ const ContactFooter = () => {
             img: <FaInstagram className="text-2xl"/>
         },
         {
-            link: "/login",
-            img: <FaUser className="text-2xl"/>
+            link: user ? "" : "/login",
+            img: user ? <LogOut /> : <FaUser className="text-2xl"/>
         }
     ]
   return (

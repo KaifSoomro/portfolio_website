@@ -247,7 +247,7 @@ export const getEverything = async (req, res) => {
     }
 
     const totalViews = projects.reduce((acc, project) => {
-      acc + (project.views || 0);
+      return acc + (project.views || 0);
     }, 0);
 
     const newData = [
@@ -285,18 +285,46 @@ export const getFeaturedProjects = async (req, res) => {
     if (!featuredProjects) {
       return res.status(404).json({
         success: false,
-        message: "No featured projects were found."
+        message: "No featured projects were found.",
       });
     }
 
     return res.status(200).json({
       success: true,
-      featuredProjects
-    })
+      featuredProjects,
+    });
   } catch (error) {
     return res.status(500).json({
       success: false,
       error: "Internal server error in featuredProjects",
+      message: error.message,
+    });
+  }
+};
+
+export const increaseViews = async (req, res) => {
+  try {
+    const { projectId } = req.body;
+
+    const project = await Project.findById({ _id: projectId });
+    if (!project) {
+      return res.status(404).json({
+        success: false,
+        message: "Project not found.",
+      });
+    }
+
+    project.views = project.views + 1;
+
+    await project.save();
+
+    return res.status(200).json({
+      success: true
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: "Internal server error in increaseViews",
       message: error.message,
     });
   }
