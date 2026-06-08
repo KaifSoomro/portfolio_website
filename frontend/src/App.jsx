@@ -28,6 +28,7 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/skills" element={<Skills />} />
+        <Route path="*" element={<div>Page Not Found</div>} />
 
         {/* Private Routes */}
         <Route
