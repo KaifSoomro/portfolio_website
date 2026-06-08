@@ -29,6 +29,13 @@ app.use("/api/v1/project", projectRoute);
 app.use("/api/v1/contact", contactRoute);
 app.use("/api/v1/resume", resumeRoute);
 
+app.get("/", (_, res) => {
+    res.send({
+        backend: true,
+        message: "Backend is working fine."
+    })
+})
+
 app.listen(PORT, () => {
     connectDB();
     console.log(`Server is running on port: ${PORT}`);
