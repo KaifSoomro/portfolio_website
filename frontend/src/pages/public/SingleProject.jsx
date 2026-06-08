@@ -62,14 +62,14 @@ const SingleProject = () => {
 
             <button
               onClick={() => setImageIndex(imageIndex + 1)}
-              className="absolute md:right-10 md:bottom-30 w-10 h-10 right-5 bottom-0 md:w-17 md:h-17 rounded-full bg-neutral-500/50 text-white flex items-center justify-center cursor-pointer hover:scale-105 duration-200 transition-all hover:bg-neutral-500/60 backdrop-blur-sm border border-neutral-500/40"
+              className="absolute md:right-10 md:bottom-30 w-10 h-10 right-5 bottom-0 md:w-17 md:h-17 rounded-full bg-neutral-500/50 text-white flex items-center justify-center cursor-pointer hover:scale-105 duration-200 transition-all hover:bg-neutral-500/60 backdrop-blur-sm border border-neutral-500/40 active:scale-95"
             >
               <ArrowRight />
             </button>
 
             <button
               onClick={() => setImageIndex(imageIndex - 1)}
-              className="absolute md:left-10 md:bottom-30 w-10 h-10 left-5 bottom-0 md:w-17 md:h-17  rounded-full bg-neutral-500/50 text-white flex items-center justify-center cursor-pointer hover:scale-105 duration-200 transition-all hover:bg-neutral-500/60 backdrop-blur-sm border border-neutral-500/40"
+              className="absolute md:left-10 md:bottom-30 w-10 h-10 left-5 bottom-0 md:w-17 md:h-17  rounded-full bg-neutral-500/50 text-white flex items-center justify-center cursor-pointer hover:scale-105 duration-200 transition-all hover:bg-neutral-500/60 backdrop-blur-sm border border-neutral-500/40 active:scale-95"
             >
               <ArrowLeft />
             </button>
