@@ -54,7 +54,7 @@ const Projects = () => {
       </div>
 
       <Container>
-        <div className="w-full grid grid-cols-1 md:grid-cols-3 md:mt-20 mt-15">
+        <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-10 md:mt-20 mt-15">
           {projects &&
             projects?.map((project, index) => (
               <ProjectCard key={index} project={project} />

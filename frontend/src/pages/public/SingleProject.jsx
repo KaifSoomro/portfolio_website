@@ -88,18 +88,20 @@ const SingleProject = () => {
                 <h1 className="md:text-5xl text-3xl font-semibold mb-3">
                   {project?.title}
                 </h1>
-                <h1 className="md:text-3xl text-2xl text-neutral-500">{project?.subTitle}</h1>
+                <h1 className="md:text-3xl text-2xl text-neutral-500">
+                  {project?.subTitle}
+                </h1>
               </div>
               <div>
                 <p className="text-lg text-neutral-500 text-start md:text-end mt-4 md:mt-0">
                   Created on: {ChangeDateFormat(project?.createdAt)}
                 </p>
-                <div className="mt-3">
+                <div className="mt-3 flex items-center gap-3">
                   <span className="px-3 py-1 capitalize rounded-full bg-green-500/10 border border-green-500/30 text-green-500">
                     {project?.status}
                   </span>
                   {project?.isFeatured && (
-                    <span className="px-3 py-1 capitalize rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 mx-3">
+                    <span className="px-3 py-1 capitalize rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400">
                       Featured
                     </span>
                   )}
@@ -110,13 +112,17 @@ const SingleProject = () => {
               </div>
             </div>
 
-            <h1 className="mt-10 md:mt-15 text-3xl md:text-5xl font-bold md:mb-10">Project Overview</h1>
+            <h1 className="mt-10 md:mt-15 text-3xl md:text-5xl font-bold md:mb-10">
+              Project Overview
+            </h1>
 
             <p className="text-neutral-500 md:text-xl text-lg md:leading-9 mt-6">
               {project?.description}
             </p>
 
-            <h1 className="md:mt-15 text-3xl md:text-5xl font-bold md:mb-10 mt-8">Tech Stack</h1>
+            <h1 className="md:mt-15 text-3xl md:text-5xl font-bold md:mb-10 mt-8">
+              Tech Stack
+            </h1>
 
             <div className="flex flex-col md:flex-row items-start md:items-center justify-start gap-6 md:gap-10">
               {project?.techStack.map((tech, index) => (
@@ -136,21 +142,45 @@ const SingleProject = () => {
                 </h2>
 
                 <div className="flex flex-col md:flex-row gap-4">
-                  <button
-                    disabled={project?.liveUrl.length === 0}
-                    onClick={() => navigate(project?.liveUrl)}
-                    className="px-8 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-[1.02] transition disabled:opacity-30 flex items-center gap-3 group"
-                  >
-                    <span className="text-red-500 transition animate-pulse"><FaCircle /></span> Live Demo 
-                  </button>
+                  {project?.liveUrl.length === 0 ? (
+                    <Link
+                      to={""}
+                      className="px-8 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-[1.02] transition opacity-30 flex items-center gap-3 group"
+                    >
+                      <span className="text-red-500 transition animate-pulse">
+                        <FaCircle />
+                      </span>{" "}
+                      Live Demo
+                    </Link>
+                  ) : (
+                    <Link
+                      to={project?.liveUrl}
+                      target="_blank"
+                      className="px-8 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-[1.02] transition disabled:opacity-30 flex items-center gap-3 group"
+                    >
+                      <span className="text-red-500 transition animate-pulse">
+                        <FaCircle />
+                      </span>{" "}
+                      Live Demo
+                    </Link>
+                  )}
 
-                  <button
-                    disabled={project?.githubUrl.length === 0}
-                    onClick={() => navigate(project?.githubUrl)}
-                    className="px-8 py-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md hover:bg-white/10 transition disabled:opacity-30 flex items-center gap-3"
-                  >
-                    <FaGithub /> GitHub Repository
-                  </button>
+                  {project?.githubUrl.length === 0 ? (
+                    <Link
+                      to={""}
+                      className="px-8 py-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md hover:bg-white/10 transition opacity-30 flex items-center gap-3"
+                    >
+                      <FaGithub /> GitHub Repository
+                    </Link>
+                  ) : (
+                    <Link
+                      to={project?.githubUrl}
+                      target="_blank"
+                      className="px-8 py-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md hover:bg-white/10 transition flex items-center gap-3"
+                    >
+                      <FaGithub /> GitHub Repository
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
