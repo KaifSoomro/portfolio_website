@@ -8,6 +8,7 @@ import { FaGithub } from "react-icons/fa";
 import ContactFooter from "../../components/home/ContactFooter";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
+import SingleProjectSkeleton from "../../components/common/SingleProjectSkeleton";
 
 const SingleProject = () => {
   const { projectId } = useParams();
@@ -50,9 +51,13 @@ const SingleProject = () => {
     setImageIndex(4);
   }
 
+
   return (
     <>
-      <div className="w-full md:mt-40 mt-20 p-5 rounded-lg">
+      {
+        isLoading && <SingleProjectSkeleton />
+      }
+       <div className="w-full md:mt-40 mt-20 p-5 rounded-lg">
         <Container>
           <div className="w-full md:h-150 relative overflow-hidden">
             {/* main img */}
