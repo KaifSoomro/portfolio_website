@@ -141,7 +141,7 @@ const SingleProject = () => {
                     onClick={() => navigate(project?.liveUrl)}
                     className="px-8 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-[1.02] transition disabled:opacity-30 flex items-center gap-3 group"
                   >
-                    <span className="group-hover:text-red-500 transition"><FaCircle /></span> Live Demo 
+                    <span className="text-red-500 transition animate-pulse"><FaCircle /></span> Live Demo 
                   </button>
 
                   <button
