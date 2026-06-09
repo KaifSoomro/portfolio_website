@@ -14,7 +14,7 @@ const ExperienceComp = () => {
           <div className="mt-3 md:mt-0 text-white md:text-2xl flex flex-col md:flex-row items-start md:items-center justify-between">
             <h1 className="flex items-center gap-5 md:gap-8">
               <span>
-                <img src="/exp-img.png" alt="" width={50} />
+                <img src="/exp-img.png" alt="" width={50} loading="lazy" />
               </span>{" "}
               Full-Stack Developer at Xolvexis Solutions
             </h1>

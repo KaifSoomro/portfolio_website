@@ -7,7 +7,7 @@ const Experienced = () => {
         <h1 className='text-xl text-white font-semibold uppercase tracking-wider'>Experience with</h1>
 
         <div className='md:mt-5'>
-            <img src="/Logos.png" alt="" className='w-70 md:w-max'/>
+            <img src="/Logos.png" alt="" loading="lazy" className='w-70 md:w-max'/>
         </div>
     </motion.div>
   )

@@ -15,6 +15,7 @@ const Hero = () => {
         <img
           src="/avatar.png"
           alt=""
+          loading="lazy"
           className="w-40 md:w-65 rounded-full bg-[#0f0f17]"
         />
       </motion.div>

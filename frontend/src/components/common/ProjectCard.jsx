@@ -35,13 +35,14 @@ const ProjectCard = ({ project }) => {
     <Link
       to={`/projects/${project?._id}`}
       onClick={() => addViews(project?._id)}
-      className="group relative block w-full max-w-[500px]"
+      className="group relative block w-full max-w-125"
     >
       <div className="relative overflow-hidden rounded-2xl bg-[#111111] transition-all duration-500">
         <img
           src={project?.images?.[0]?.url}
           alt={project?.title}
-          className="aspect-[16/10] w-full object-cover transition-transform duration-400 group-hover:scale-105"
+          loading="lazy"
+          className="aspect-16/10 w-full object-cover transition-transform duration-400 group-hover:scale-105"
         />
 
         {/* Dark Overlay */}

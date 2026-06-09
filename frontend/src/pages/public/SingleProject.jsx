@@ -61,6 +61,7 @@ const SingleProject = () => {
             <Zoom>
               <img
                 src={project?.images[imageIndex]?.url}
+                loading="lazy"
                 alt=""
                 className="w-max object-cover rounded-lg"
               />
