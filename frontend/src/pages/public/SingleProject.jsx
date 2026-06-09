@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Container from "../../components/common/Container";
 import { ArrowLeft, ArrowRight, LinkIcon } from "lucide-react";
 import ChangeDateFormat from "../../utils/ChangeDateFormat";
-import { FaGithub } from "react-icons/fa";
+import { FaCircle, FaGithub, FaLink } from "react-icons/fa";
 import ContactFooter from "../../components/home/ContactFooter";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
@@ -51,13 +51,10 @@ const SingleProject = () => {
     setImageIndex(4);
   }
 
-
   return (
     <>
-      {
-        isLoading && <SingleProjectSkeleton />
-      }
-       <div className="w-full md:mt-40 mt-20 p-5 rounded-lg">
+      {isLoading && <SingleProjectSkeleton />}
+      <div className="w-full md:mt-40 mt-20 p-5 rounded-lg">
         <Container>
           <div className="w-full md:h-150 relative overflow-hidden">
             {/* main img */}
@@ -87,10 +84,10 @@ const SingleProject = () => {
           <div className="mt-10">
             <div className="w-full flex flex-col md:flex-row justify-between">
               <div>
-                <h1 className="md:text-4xl text-3xl font-semibold mb-3">
+                <h1 className="md:text-5xl text-3xl font-semibold mb-3">
                   {project?.title}
                 </h1>
-                <h1 className="md:text-4xl text-2xl">{project?.subTitle}</h1>
+                <h1 className="md:text-3xl text-2xl text-neutral-500">{project?.subTitle}</h1>
               </div>
               <div>
                 <p className="text-lg text-neutral-500 text-start md:text-end mt-4 md:mt-0">
@@ -112,17 +109,19 @@ const SingleProject = () => {
               </div>
             </div>
 
-            <p className="text-neutral-500 text-lg mt-5">
+            <h1 className="mt-10 md:mt-15 text-3xl md:text-5xl font-bold md:mb-10">Project Overview</h1>
+
+            <p className="text-neutral-500 md:text-xl text-lg md:leading-9 mt-6">
               {project?.description}
             </p>
 
-            <h1 className="text-3xl mt-8 mb-3">Tech Stack</h1>
+            <h1 className="md:mt-15 text-3xl md:text-5xl font-bold md:mb-10 mt-8">Tech Stack</h1>
 
             <div className="flex flex-col md:flex-row items-start md:items-center justify-start gap-6 md:gap-10">
               {project?.techStack.map((tech, index) => (
                 <p
                   key={index}
-                  className="px-4 py-1 text-pink-100 border border-pink-500/30 bg-pink-600/10 rounded-lg text-lg mt-4"
+                  className="px-5 py-2 text-pink-100 border border-pink-500/30 bg-pink-600/10 rounded-full text-lg mt-6"
                 >
                   {tech}
                 </p>
@@ -130,29 +129,28 @@ const SingleProject = () => {
             </div>
 
             <div>
-              <h1 className="text-3xl mt-10 mb-4">Links</h1>
-              <div>
-                <button
-                  disabled={project?.liveUrl.length === 0 && true}
-                  onClick={() => navigate(project?.liveUrl)}
-                  className={`flex items-center gap-2 cursor-pointer text-lg ${project?.liveUrl.length === 0 ? "text-blue-500/50" : "text-blue-500"}`}
-                >
-                  <LinkIcon />
-                  {project?.liveUrl
-                    ? project?.liveUrl
-                    : "No live link provided yet."}
-                </button>
+              <div className="max-w-6xl md:mt-24 md:mb-24 mt-15">
+                <h2 className="text-3xl md:text-5xl font-bold mb-10">
+                  Explore Project
+                </h2>
 
-                <button
-                  disabled={project?.githubUrl.length === 0 && true}
-                  onClick={() => navigate(project?.githubUrl)}
-                  className={`flex items-center gap-2 mt-3 cursor-pointer text-lg ${project?.githubUrl.length === 0 ? "text-blue-500/50" : "text-blue-500"}`}
-                >
-                  <FaGithub />
-                  {project?.githubUrl
-                    ? project?.githubUrl
-                    : "No github link provided yet."}
-                </button>
+                <div className="flex flex-col md:flex-row gap-4">
+                  <button
+                    disabled={project?.liveUrl.length === 0}
+                    onClick={() => navigate(project?.liveUrl)}
+                    className="px-8 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-[1.02] transition disabled:opacity-30 flex items-center gap-3 group"
+                  >
+                    <span className="group-hover:text-red-500 transition"><FaCircle /></span> Live Demo 
+                  </button>
+
+                  <button
+                    disabled={project?.githubUrl.length === 0}
+                    onClick={() => navigate(project?.githubUrl)}
+                    className="px-8 py-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md hover:bg-white/10 transition disabled:opacity-30 flex items-center gap-3"
+                  >
+                    <FaGithub /> GitHub Repository
+                  </button>
+                </div>
               </div>
             </div>
           </div>
